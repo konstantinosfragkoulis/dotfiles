@@ -1,5 +1,6 @@
 filetype plugin indent on
 syntax on
+syntax enable
 
 runtime macros/matchit.vim
 
@@ -17,6 +18,9 @@ set undofile
 set incsearch
 set ruler
 
+packadd! dracula
+colorscheme dracula
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'morhetz/gruvbox'
@@ -32,6 +36,7 @@ Plug 'tomlion/vim-solidity'
 Plug 'tpope/vim-surround'
 Plug 'sirver/UltiSnips'
 Plug 'honza/vim-snippets'
+Plug 'dracula/vim', { 'as': 'dracula' },
 
 call plug#end()
 
@@ -75,7 +80,6 @@ function! Cpp()
     " configure tabwidth and insert spaces instead of tabs
     set tabstop=4        " tab width is 4 spaces
     set shiftwidth=4     " indent also with 4 spaces
-    set expandtab        " expand tabs to spaces
     set smarttab
     " wrap lines at 120 chars. 80 is somewaht antiquated with nowadays displays.
     set textwidth=120
@@ -141,4 +145,12 @@ endfunction
 
 " File Templates
 :autocmd BufNewFile *.cpp -r ~/.vim/templates/template.cpp
+:autocmd BufNewFile *.c -r ~/.vim/templates/template.c
 :autocmd BufReadPost,BufNewFile *.cpp call Cpp()
+:autocmd BufReadPost,BufNewFile *.c call Cpp()
+
+" Use ctrl-[hjkl] to select the active split!
+nmap <silent> <c-k> :wincmd k<CR>
+nmap <silent> <c-j> :wincmd j<CR>
+nmap <silent> <c-h> :wincmd h<CR>
+nmap <silent> <c-l> :wincmd l<CR>
